@@ -39,4 +39,5 @@ for player in resultSet:
             query = "INSERT INTO Players VALUES ('{}','{}','{}','{}','{}')".format(playerID, playerName, height, teamID, position)
             print query
             c.execute(query)
+            r2.close()
         oldPlayerName = playerName
