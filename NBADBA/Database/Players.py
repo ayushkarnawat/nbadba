@@ -41,3 +41,5 @@ for player in resultSet:
             c.execute(query)
             r2.close()
         oldPlayerName = playerName
+conn.commit()
+conn.close()
