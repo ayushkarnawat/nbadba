@@ -20,26 +20,30 @@ resultSet =  playerContent["resultSets"][0]["rowSet"]
 conn = sqlite3.connect(sqlite_file)
 c = conn.cursor()
 print 'DONE with first request'
+oldPlayerID = 0
 for player in resultSet:
-    oldPlayerName = ' '
     if(player[5] == '2016'):
         #playerID, playerName, height, TeamID, Role
         #get the team roster for this Team
 
-        playerID = player[0]
+        playerID = int(player[0])
         playerName = player[2]
         playerName = playerName.replace(u"'",u"")
-        if(playerName != oldPlayerName):
+        teamID = player[10]
+        #print playerID
+        if((playerID != oldPlayerID)&(teamID != '')):
             r2 = requests.get('http://stats.nba.com/stats/commonplayerinfo/?',headers = HEADERS, params = {'PlayerId':player[0]})
             playerSpecific = r2.json()
             resultSet2 = playerSpecific["resultSets"][0]["rowSet"]
             height = resultSet2[0][10]
             position = resultSet2[0][14]
-            teamID = player[10]
+
             query = "INSERT INTO Players VALUES ('{}','{}','{}','{}','{}')".format(playerID, playerName, height, teamID, position)
             print query
             c.execute(query)
             r2.close()
-        oldPlayerName = playerName
+
+        oldPlayerID = int(playerID)
+        #print oldPlayerID
 conn.commit()
 conn.close()
