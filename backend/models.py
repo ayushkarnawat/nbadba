@@ -48,7 +48,7 @@ class Player(models.Model):
     player_id = models.CharField(max_length=10, primary_key=True)
     player_name = models.CharField(max_length=30)
     height = models.IntegerField()
-    team_id = models.ForeignKey(Team, on_delete=models.DO_NOTHING)
+    team = models.ForeignKey(Team, on_delete=models.DO_NOTHING)
     role = models.CharField(max_length=20)
 
     def __str__(self):
@@ -72,8 +72,8 @@ class Player(models.Model):
 # );
 class GameScore(models.Model):
     date = models.DateField(blank=True, null=True)  # Field name made lowercase.
-    home_team_id = models.ForeignKey(Team, models.DO_NOTHING, blank=True, null=True, related_name='home_team_id')  # Field name made lowercase.
-    away_team_id = models.ForeignKey(Team, models.DO_NOTHING, blank=True, null=True, related_name='away_team_id')  # Field name made lowercase.
+    home_team_id = models.ForeignKey(Team, models.DO_NOTHING, blank=True, null=True, related_name='home_team')  # Field name made lowercase.
+    away_team_id = models.ForeignKey(Team, models.DO_NOTHING, blank=True, null=True, related_name='away_team')  # Field name made lowercase.
     home_score = models.IntegerField(blank=True, null=True)  # Field name made lowercase.
     away_score = models.IntegerField(blank=True, null=True)  # Field name made lowercase.
 
@@ -99,8 +99,8 @@ class GameScore(models.Model):
 # );
 class Game(models.Model):
     date = models.DateField(blank=True, null=True)  # Field name made lowercase.
-    home_team_id = models.ForeignKey(Team, models.DO_NOTHING, blank=True, null=True, related_name='home_team_id_game')
-    away_team_id = models.ForeignKey(Team, models.DO_NOTHING, blank=True, null=True, related_name='away_team_id_game')
+    home_team_id = models.ForeignKey(Team, models.DO_NOTHING, blank=True, null=True, related_name='home_team_game')
+    away_team_id = models.ForeignKey(Team, models.DO_NOTHING, blank=True, null=True, related_name='away_team_game')
     WINNING_TEAM_CHOICES = (
         ('HOME', 'Home Team'),
         ('AWAY', 'Away Team')
@@ -129,7 +129,7 @@ class Coach(models.Model):
     coach_id = models.CharField(max_length=5, primary_key=True)  # Field name made lowercase.
     coach_name = models.CharField(max_length=30, blank=True, null=True)  # Field name made lowercase.
     age = models.IntegerField(blank=True, null=True)
-    team_id = models.ForeignKey(Team, models.DO_NOTHING, blank=True, null=True)  # Field name made lowercase.
+    team = models.ForeignKey(Team, models.DO_NOTHING, blank=True, null=True)  # Field name made lowercase.
 
     def __str__(self):
         return self.coach_id + ": " + self.coach_name
@@ -154,7 +154,7 @@ class Owner(models.Model):
     owner_name = models.CharField(max_length=30, blank=True, null=True)  # Field name made lowercase.
     age = models.IntegerField(blank=True, null=True)
     networth = models.IntegerField(blank=True, null=True)  # Field name made lowercase.
-    team_id = models.ForeignKey(Team, models.DO_NOTHING, blank=True, null=True)  # Field name made lowercase.
+    team = models.ForeignKey(Team, models.DO_NOTHING, blank=True, null=True)  # Field name made lowercase.
 
     def __str__(self):
         return self.owner_id + ": " + self.owner_name
@@ -180,12 +180,12 @@ class Owner(models.Model):
 class PlaysIn(models.Model):
     player_id = models.ForeignKey(Player, models.DO_NOTHING, blank=True, null=True)  # Field name made lowercase.
     date = models.DateField(blank=True, null=True)  # Field name made lowercase.
-    home_team_id = models.ForeignKey(Team, models.DO_NOTHING, blank=True, null=True, related_name='home_team_id_playsin')  # Field name made lowercase.
-    away_team_id = models.ForeignKey(Team, models.DO_NOTHING, blank=True, null=True, related_name='away_team_id_playsin')  # Field name made lowercase.
+    home_team_id = models.ForeignKey(Team, models.DO_NOTHING, blank=True, null=True, related_name='home_team_playsin')  # Field name made lowercase.
+    away_team_id = models.ForeignKey(Team, models.DO_NOTHING, blank=True, null=True, related_name='away_team_playsin')  # Field name made lowercase.
     points_scored = models.IntegerField(blank=True, null=True)  # Field name made lowercase.
 
     def __str__(self):
-        return self.player_id.player_name + " Plays In: " + self.date + ", Home Team ID: " + self.home_team_id + ", Away Team ID: " + self.away_team_id
+        return self.player_id.player_name + " Plays In: " + self.date + ", Home Team ID: " + self.home_team + ", Away Team ID: " + self.away_team
 
     class Meta:
         db_table = 'PlaysIn'
