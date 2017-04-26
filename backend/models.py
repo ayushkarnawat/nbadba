@@ -15,8 +15,8 @@ from django.db import models
 # );
 class Team(models.Model):
     team_id = models.CharField(max_length=3, primary_key=True)
-    home_city = models.CharField(max_length=20)
     team_name = models.CharField(max_length=20)
+    home_city = models.CharField(max_length=20)
     rank = models.IntegerField()
     CONFERENCE_CHOICES = (
         ('EAST', 'EASTERN'),
@@ -48,8 +48,8 @@ class Player(models.Model):
     played_id = models.CharField(max_length=5, primary_key=True)
     player_name = models.CharField(max_length=30)
     height = models.IntegerField()
+    team_id = models.ForeignKey(Team, on_delete=models.DO_NOTHING)
     role = models.CharField(max_length=20)
-    team_id = models.ForeignKey(Team, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.played_id

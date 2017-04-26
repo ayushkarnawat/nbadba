@@ -159,7 +159,7 @@
 																		<!--<p class="category">Backend development</p>-->
 																</div>
 																<div class="content">
-																		<div class="table-full-width">
+																		<!--<div class="table-full-width">-->
 																			{% for game in games %}
 																				<li><a href="/games/{{ game.date.year }}-{{ game.date.month }}-{{ game.date.day }}/{{ game.away_team_id.team_name}}-{{game.home_team_id.team_name}}" />{{ game.away_team_id.team_name }} vs. {{ game.home_team_id.team_name }}</li>
 																			{% endfor %}
@@ -264,7 +264,7 @@
 																								</tr>
 																						</tbody>
 																				</table>-->
-																		</div>
+																		<!--</div>-->
 
 																		<div class="footer">
 																				<hr>
