@@ -1,0 +1,296 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+		<!--Title-->
+		<title>NBA Database</title>
+		
+		<!-- Custom styles for this template -->
+		<link rel="stylesheet" type="text/css" href="{% static 'css/animate.min.css' %}"> 
+		<link rel="stylesheet" type="text/css" href="{% static 'css/light-bootstrap-dashboard.css' %}"> 
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+		<!--Fonts and icons-->
+		<link rel="stylesheet" type="text/css" href="{% static 'css/pe-icon-7-stroke.css' %}" >
+		<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  </head>
+
+	<body>
+		<div class="wrapper">
+				<div class="sidebar" data-color="blue">
+					<div class="sidebar-wrapper">
+						<div class="logo">
+							<a href="/" class="simple-text"> NBA Database </a>
+						</div>
+
+						<ul class="nav">
+							<li class="active">
+								<a href="/">
+									<i class="pe-7s-graph"></i>
+									<p>Overview</p>
+								</a>
+							</li>
+							<li>
+								<a href="/teams">
+									<i class="pe-7s-note2"></i>
+									<p>Teams</p>
+								</a>
+							</li>
+							<li>
+								<a href="/players">
+									<i class="pe-7s-user"></i>
+									<p>Players</p>
+								</a>
+							</li>
+							<li>
+								<a href="/games">
+									<i class="pe-7s-news-paper"></i>
+									<p>Games</p>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="main-panel">
+					<nav class="navbar navbar-default navbar-fixed">
+						<div class="container-fluid">
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+									<span class="sr-only">Toggle navigation</span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+								</button>
+								<a class="navbar-brand" href="#">Dashboard</a>
+							</div>
+							
+							<div class="collapse navbar-collapse">
+								<ul class="nav navbar-nav navbar-left">
+									<!--<li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+											<i class="fa fa-globe"></i>
+											<b class="caret"></b>
+											<span class="notification">5</span>
+										</a>
+										<ul class="dropdown-menu">
+											<li><a href="#">Notification 1</a></li>
+											<li><a href="#">Notification 2</a></li>
+											<li><a href="#">Notification 3</a></li>
+											<li><a href="#">Notification 4</a></li>
+											<li><a href="#">Another notification</a></li>
+										</ul>
+									</li>-->
+								</ul>
+
+								<ul class="nav navbar-nav navbar-right">
+									<li><a href="/admin">Admin</a></li>
+									<li><a href="#">Log out</a></li>
+								</ul>
+							</div>
+						</div>
+					</nav>
+
+
+						<div class="content">
+								<div class="container-fluid">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="card">
+												<div class="header">
+													<h4 class="title">Teams</h4>
+													<!--<p class="category">Backend development</p>-->
+												</div>
+												<div class="content">
+													<!--<div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>-->
+													{% for team in teams %}
+														<li><a href="/teams/{{ team.team_id }}/" />{{ team.home_city }} {{ team.team_name }}</li>
+													{% endfor %}
+													<div class="footer">
+														<hr>
+														<div class="stats">
+															<i class="text-center"></i> View more
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-md-6">
+											<div class="card">
+												<div class="header">
+													<h4 class="title">Players</h4>
+													<!--<p class="category">Backend development</p>-->
+												</div>
+												<div class="content">
+													<!--<div id="chartHours" class="ct-chart"></div>-->
+													{% for player in players %}
+														<li><a href="/players/{{ player.player_id }}/" />{{ player.player_name }}</li>
+													{% endfor %}
+													<div class="footer">
+														<hr>
+														<div class="stats">
+															<i class="text-center"></i> View more
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+
+
+										<div class="row">
+
+												<div class="col-md-12">
+														<div class="card ">
+																<div class="header">
+																		<h4 class="title">Games</h4>
+																		<!--<p class="category">Backend development</p>-->
+																</div>
+																<div class="content">
+																		<div class="table-full-width">
+																			{% for game in games %}
+																				<li><a href="/games/{{ game.date.year }}-{{ game.date.month }}-{{ game.date.day }}/{{ game.away_team_id.team_name}}-{{game.home_team_id.team_name}}" />{{ game.away_team_id.team_name }} vs. {{ game.home_team_id.team_name }}</li>
+																			{% endfor %}
+																				<!--<table class="table">
+																						<tbody>
+																								<tr>
+																										<td>
+																												<label class="checkbox">
+																														<input type="checkbox" value="" data-toggle="checkbox">
+																												</label>
+																										</td>
+																										<td>Sign contract for "What are conference organizers afraid of?"</td>
+																										<td class="td-actions text-right">
+																												<button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
+																														<i class="fa fa-edit"></i>
+																												</button>
+																												<button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+																														<i class="fa fa-times"></i>
+																												</button>
+																										</td>
+																								</tr>
+																								<tr>
+																										<td>
+																												<label class="checkbox">
+																														<input type="checkbox" value="" data-toggle="checkbox" checked="">
+																												</label>
+																										</td>
+																										<td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
+																										<td class="td-actions text-right">
+																												<button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
+																														<i class="fa fa-edit"></i>
+																												</button>
+																												<button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+																														<i class="fa fa-times"></i>
+																												</button>
+																										</td>
+																								</tr>
+																								<tr>
+																										<td>
+																												<label class="checkbox">
+																														<input type="checkbox" value="" data-toggle="checkbox" checked="">
+																												</label>
+																										</td>
+																										<td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+		</td>
+																										<td class="td-actions text-right">
+																												<button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
+																														<i class="fa fa-edit"></i>
+																												</button>
+																												<button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+																														<i class="fa fa-times"></i>
+																												</button>
+																										</td>
+																								</tr>
+																								<tr>
+																										<td>
+																												<label class="checkbox">
+																														<input type="checkbox" value="" data-toggle="checkbox">
+																												</label>
+																										</td>
+																										<td>Create 4 Invisible User Experiences you Never Knew About</td>
+																										<td class="td-actions text-right">
+																												<button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
+																														<i class="fa fa-edit"></i>
+																												</button>
+																												<button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+																														<i class="fa fa-times"></i>
+																												</button>
+																										</td>
+																								</tr>
+																								<tr>
+																										<td>
+																												<label class="checkbox">
+																														<input type="checkbox" value="" data-toggle="checkbox">
+																												</label>
+																										</td>
+																										<td>Read "Following makes Medium better"</td>
+																										<td class="td-actions text-right">
+																												<button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
+																														<i class="fa fa-edit"></i>
+																												</button>
+																												<button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+																														<i class="fa fa-times"></i>
+																												</button>
+																										</td>
+																								</tr>
+																								<tr>
+																										<td>
+																												<label class="checkbox">
+																														<input type="checkbox" value="" data-toggle="checkbox">
+																												</label>
+																										</td>
+																										<td>Unfollow 5 enemies from twitter</td>
+																										<td class="td-actions text-right">
+																												<button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
+																														<i class="fa fa-edit"></i>
+																												</button>
+																												<button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+																														<i class="fa fa-times"></i>
+																												</button>
+																										</td>
+																								</tr>
+																						</tbody>
+																				</table>-->
+																		</div>
+
+																		<div class="footer">
+																				<hr>
+																				<div class="stats">
+																						<i class="text-center"></i> View all games played
+																				</div>
+																		</div>
+																</div>
+														</div>
+												</div>
+										</div>
+								</div>
+						</div>
+
+
+					<footer class="footer">
+						<div class="container-fluid">
+							<p class="copyright text-center"> 
+								Made with <img src="{% static 'fonts/code.svg' %}" alt="html"> in 2017
+							</p>
+						</div>
+					</footer>
+
+			</div>
+		</div>
+
+	</body>
+
+</html>
