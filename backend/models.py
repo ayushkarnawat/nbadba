@@ -32,6 +32,9 @@ class Team(models.Model):
     def __unicode__(self):
         return self.team_id + ": " + self.home_city + " " + self.team_name
 
+    class Meta:
+        db_table = 'Teams'
+
 # CREATE TABLE Players (
 #       PlayerID char(5), 
 #       PlayerName varchar(30), 
@@ -44,7 +47,7 @@ class Team(models.Model):
 class Player(models.Model):
     played_id = models.CharField(max_length=5, primary_key=True)
     player_name = models.CharField(max_length=30)
-    height = models.CharField(max_length=10)
+    height = models.IntegerField()
     role = models.CharField(max_length=20)
     team_id = models.ForeignKey(Team, on_delete=models.CASCADE)
 
@@ -53,6 +56,9 @@ class Player(models.Model):
 
     def __unicode__(self):
         return self.played_id
+
+    class Meta:
+        db_table = 'Players'
 
 # CREATE TABLE GameScore (
 #       Date date, 
@@ -108,6 +114,7 @@ class Game(models.Model):
         return str(self.date) + ": "+ self.home_team_id.team_name + " vs. " + self.away_team_id.team_name
 
     class Meta:
+        db_table = 'Games'
         unique_together = (('date', 'home_team_id', 'away_team_id'),)
 
 # CREATE TABLE Coach (
@@ -154,6 +161,9 @@ class Owner(models.Model):
 
     def __unicode__(self):
         return self.owner_id + ": " + self.owner_name
+
+    class Meta:
+        db_table = 'Owners'
 
 # CREATE TABLE PlaysIn (
 #       PlayerID varchar(5), 
