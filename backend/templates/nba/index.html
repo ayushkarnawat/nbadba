@@ -115,13 +115,15 @@
 												</div>
 												<div class="content">
 													<!--<div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>-->
-													{% for team in teams %}
+													{% for team in teams|slice:":10" %}
 														<li><a href="/teams/{{ team.team_id }}/" />{{ team.home_city }} {{ team.team_name }}</li>
 													{% endfor %}
 													<div class="footer">
 														<hr>
 														<div class="stats">
-															<i class="text-center"></i> View more
+															<a href="/teams/">
+																<i class="text-center"></i> View more
+															</a>
 														</div>
 													</div>
 												</div>
@@ -136,14 +138,14 @@
 												</div>
 												<div class="content">
 													<!--<div id="chartHours" class="ct-chart"></div>-->
-													{% for player in players %}
+													{% for player in players|slice:":10" %}
 														<li><a href="/players/{{ player.player_id }}/" />{{ player.player_name }}</li>
 													{% endfor %}
 													<div class="footer">
 														<hr>
-														<div class="stats">
+														<a href="/players/">
 															<i class="text-center"></i> View more
-														</div>
+														</a>
 													</div>
 												</div>
 											</div>
@@ -163,7 +165,7 @@
 																<div class="content">
 																		<!--<div class="table-full-width">-->
 																			{% for game in games %}
-																				<li><a href="/games/{{ game.date.year }}-{{ game.date.month }}-{{ game.date.day }}/{{ game.away_team_id_id.team_name}}-{{game.home_team_id_id.team_name}}" />{{ game.away_team_id.team_name }} vs. {{ game.home_team_id.team_name }}</li>
+																				<li><a href="/games/{{ game.date.year }}-{{ game.date.month }}-{{ game.date.day }}/{{ game.away_team_id.team_name}}-{{game.home_team_id.team_name}}" />{{ game.away_team_id.team_name }} vs. {{ game.home_team_id.team_name }}</li>
 																			{% endfor %}
 																				<!--<table class="table">
 																						<tbody>
@@ -270,9 +272,9 @@
 
 																		<div class="footer">
 																				<hr>
-																				<div class="stats">
-																						<i class="text-center"></i> View all games played
-																				</div>
+																				<a href="/games/">
+																					<i class="text-center"></i> View all games
+																				</a>
 																		</div>
 																</div>
 														</div>
