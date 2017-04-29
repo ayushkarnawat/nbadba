@@ -32,9 +32,15 @@ def team_detail(request, team_id):
     # queryset = Player.objects.filter(team__startswith = '')
     players = get_list_or_404(Player, team=team_id)
     # coaches = get_list_or_404(Coach, team=team_id)
-    # owners = get_object_or_404(Owner, team=team_id)
+    # owners = get_list_or_404(Owner, team=team_id)
     return render(request, 'nba/team_detail.html', {'team': team, 'players': players})
 
 def player_detail(request, player_id):
     player = get_object_or_404(Player, pk=player_id)
     return render(request, 'nba/player_detail.html', {'player': player})
+
+def game_detail(request, year, month, day, away_team_id, home_team_id):
+    # Get the game with the same date, home team, and away team
+    date = year + "-" + month + "-" + day
+    game = get_object_or_404(Game, date=date, home_team_id=home_team_id, away_team_id=away_team_id)
+    return render(request, 'nba/game_detail.html', {'game': game})
