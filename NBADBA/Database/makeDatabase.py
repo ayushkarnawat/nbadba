@@ -1,7 +1,7 @@
 
 import sqlite3
 
-sqlite_file = 'database.sqlite'    # name of the sqlite database file
+sqlite_file = '../../database.sqlite'    # name of the sqlite database file
 
 
 #   Connecting to the database file
