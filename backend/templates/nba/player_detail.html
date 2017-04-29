@@ -92,18 +92,7 @@
 
 			<div class="content">
 				<div class="container-fluid">
-
-					<!--Title of team-->
-					<div class="text-center">
-						<h3>{{ team.home_city }} {{ team.team_name }}</h3>
-						<p class="category">{{ team.conference }}</p>
-					</div>
-
-					<!--List all players who play in this team-->
-					{% for player in players %}
-						<li><a href="/player/{{ player.player_id }}/" />{{ player.player_name }}</li>
-					{% endfor %}
-
+					<h3>{{ player.player_name }}</h3>
 				</div>
 			</div>
 

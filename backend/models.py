@@ -52,10 +52,10 @@ class Player(models.Model):
     role = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.player_id
+        return self.player_id + ": " + self.player_name
 
     def __unicode__(self):
-        return self.player_id
+        return self.player_id + ": " + self.player_name
 
     class Meta:
         db_table = 'Players'
@@ -184,8 +184,11 @@ class PlaysIn(models.Model):
     away_team_id = models.ForeignKey(Team, models.DO_NOTHING, blank=True, null=True, related_name='away_team_playsin')  # Field name made lowercase.
     points_scored = models.IntegerField(blank=True, null=True)  # Field name made lowercase.
 
-    def __str__(self):
-        return self.player_id.player_name + " Plays In: " + self.date + ", Home Team ID: " + self.home_team + ", Away Team ID: " + self.away_team
+    # def __str__(self):
+    #     return self.player_id.player_name + " Plays In: " + self.date + ", Home Team ID: " + self.home_team + ", Away Team ID: " + self.away_team
+
+    # def __unicode__(self):
+    #     return self.player_id.player_name + " Plays In: " + self.date + ", Home Team ID: " + self.home_team + ", Away Team ID: " + self.away_team
 
     class Meta:
         db_table = 'PlaysIn'
