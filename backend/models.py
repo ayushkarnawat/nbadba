@@ -105,7 +105,7 @@ class Game(models.Model):
         ('HOME', 'Home Team'),
         ('AWAY', 'Away Team')
     )
-    winning_team = models.CharField(max_length=20, choices=WINNING_TEAM_CHOICES, default=None, blank=True, null=True)
+    winning_team = models.CharField(max_length=20, choices=WINNING_TEAM_CHOICES, default=None)
 
     def __str__(self):
         return str(self.date) + ": "+ self.home_team_id.team_name + " vs. " + self.away_team_id.team_name
