@@ -10,18 +10,22 @@ from .models import Team, Player, GameScore, Game, Coach, Owner, PlaysIn
 
 # Create your views here.
 def index(request):
-    teams = Team.objects.all();
-    players = Player.objects.all();
-    games = Game.objects.all();
+    teams = Team.objects.all()
+    players = Player.objects.all()
+    games = Game.objects.all()
     return render(request, 'nba/index.html', {'teams': teams, 'players': players, 'games': games})
 
 def teams_overview(request):
-    teams = Team.objects.all();
+    teams = Team.objects.all()
     return render(request, 'nba/teams_overview.html', {'teams': teams})
 
 def players_overview(request):
     players = Player.objects.all();
     return render(request, 'nba/players_overview.html', {'players': players})
+
+def games_overview(request):
+    games = Game.objects.all()
+    return render(request, 'nba/games_overview.html', {'games': games})
 
 def team_detail(request, team_id):
     team = get_object_or_404(Team, pk=team_id)

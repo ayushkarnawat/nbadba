@@ -92,7 +92,15 @@
 
 			<div class="content">
 				<div class="container-fluid">
-					<h3>{{ player.player_name }}</h3>
+
+					<!--Basic Player Information-->
+					<div class="text-center">
+						<h3>{{ player.player_name}}</h3>
+						<p class="category">{{ player.role }} | 
+							<a href="/team/{{ player.team.team_id }}/">{{ player.team.home_city}} {{ player.team.team_name }}</a> 
+						</p>
+					</div>
+
 				</div>
 			</div>
 

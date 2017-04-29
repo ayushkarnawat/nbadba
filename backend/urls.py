@@ -9,8 +9,11 @@ urlpatterns = [
     # /teams/
     url(r'^teams/$', views.teams_overview, name='teams_overview'),
 
-    # /players
+    # /players/
     url(r'^players/$', views.players_overview, name='players_overview'),
+
+    # /games/
+    url(r'^games/$', views.games_overview, name='games_overview'),
 
     # /team/<team_id>
     url(r'^team/(?P<team_id>[A-Z]+)/$', views.team_detail, name='team_detail'),
