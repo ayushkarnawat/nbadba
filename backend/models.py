@@ -185,10 +185,10 @@ class PlaysIn(models.Model):
     points_scored = models.IntegerField(blank=True, null=True)  # Field name made lowercase.
 
     def __str__(self):
-        return str(self.date) + ": " + self.player_id.player_name + " in " + self.away_team_id.team_name + "vs. " + self.home_team_id.team_name
+        return str(self.date) + ": " + self.player_id.player_name + " in " + self.away_team_id.team_name + " vs. " + self.home_team_id.team_name
 
     def __unicode__(self):
-        return str(self.date) + ": " + self.player_id.player_name + " in " + self.away_team_id.team_name + "vs. " + self.home_team_id.team_name
+        return str(self.date) + ": " + self.player_id.player_name + " in " + self.away_team_id.team_name + " vs. " + self.home_team_id.team_name
 
     class Meta:
         db_table = 'PlaysIn'
