@@ -126,9 +126,9 @@ class Game(models.Model):
 #       FOREIGN KEY (TeamID) REFERENCES Teams (TeamID)
 # );
 class Coach(models.Model):
-    coach_id = models.CharField(max_length=5, primary_key=True)  # Field name made lowercase.
+    coach_id = models.CharField(max_length=10, primary_key=True)  # Field name made lowercase.
     coach_name = models.CharField(max_length=30, blank=True, null=True)  # Field name made lowercase.
-    age = models.IntegerField(blank=True, null=True)
+    coach_type = models.CharField(max_length=30, blank=True, null=True)
     team = models.ForeignKey(Team, models.DO_NOTHING, blank=True, null=True)  # Field name made lowercase.
 
     def __str__(self):
