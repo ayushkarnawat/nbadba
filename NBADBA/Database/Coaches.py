@@ -10,7 +10,7 @@ HEADERS = {'user-agent': ('Mozilla/5.0 (Windows NT 10.0; WOW64)'
 r = requests.get('http://stats.nba.com/stats/commonTeamYears/?',headers = HEADERS, params = {'LeagueID':'00'})
 
 teamContent = r.json()#all the teams and their ids
-sqlite_file = "db.sqlite3"
+sqlite_file = "../../db.sqlite3"
 conn = sqlite3.connect(sqlite_file)
 c = conn.cursor()
 resultSet = teamContent['resultSets'][0]['rowSet']
@@ -30,7 +30,7 @@ for team in resultSet:
             coachName = coach[5]
             coachName = coachName.replace(u"'",u"")
             coachType = coach[8]
-            query = "INSERT INTO Coaches SELECT '{0}','{1}','{2}','{3}' WHERE NOT EXISTS (SELECT * FROM Coaches WHERE coach_id = '{0}')".format(coachID, coachName, coachType, teamID)
+            query = "INSERT INTO Coaches SELECT '{1}','{3}','{2}','{0}' WHERE NOT EXISTS (SELECT * FROM Coaches WHERE coach_id = '{0}')".format(coachID, coachName, coachType, teamID)
             print query
             c.execute(query)
 
