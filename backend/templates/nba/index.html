@@ -148,7 +148,7 @@
 									<!--Only display 25 games-->
 									{% for game in games|slice:":25" %}
 									<li><a href="/game/{{ game.date.year }}-{{ game.date.month }}-{{ game.date.day }}/{{ game.away_team_id.team_id }}-{{ game.home_team_id.team_id }}/"
-										/>{{ game.away_team_id.team_name }} vs. {{ game.home_team_id.team_name }}</li>
+										/>{{ game.date }}: {{ game.away_team_id.team_name }} vs. {{ game.home_team_id.team_name }}</li>
 									{% endfor %}
 
 									<div class="footer">

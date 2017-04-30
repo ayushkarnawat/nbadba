@@ -40,7 +40,12 @@ def player_detail(request, player_id):
     return render(request, 'nba/player_detail.html', {'player': player})
 
 def game_detail(request, year, month, day, away_team_id, home_team_id):
-    # Get the game with the same date, home team, and away team
     date = year + "-" + month + "-" + day
+
+    # Get the game with the same date, home team, and away team
     game = get_object_or_404(Game, date=date, home_team_id=home_team_id, away_team_id=away_team_id)
-    return render(request, 'nba/game_detail.html', {'game': game})
+    game_score = get_object_or_404(GameScore, date=date, home_team_id=home_team_id, away_team_id=away_team_id)
+
+    # Get all players who played in this specific game
+    players_who_played_in_game = get_list_or_404(PlaysIn, date=date, home_team_id=home_team_id, away_team_id=away_team_id)
+    return render(request, 'nba/game_detail.html', {'game': game, 'game_score': game_score, 'players_who_played_in_game': players_who_played_in_game})

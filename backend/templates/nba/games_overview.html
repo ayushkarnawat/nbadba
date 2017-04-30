@@ -100,7 +100,7 @@
 								<div class="content">
 									{% for game in games %}
 									<li><a href="/game/{{ game.date.year }}-{{ game.date.month }}-{{ game.date.day }}/{{ game.away_team_id.team_id }}-{{ game.home_team_id.team_id }}/"
-										/>{{ game.away_team_id.team_name }} vs. {{ game.home_team_id.team_name }}</li>
+										/>{{ game.date }}: {{ game.away_team_id.team_name }} vs. {{ game.home_team_id.team_name }}</li>
 									{% endfor %}
 								</div>
 							</div>
