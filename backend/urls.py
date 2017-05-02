@@ -26,5 +26,7 @@ urlpatterns = [
 
     url(r'^forms/players/$', views.PlayersFormView.as_view(), name='players_query'),
 
-    url(r'^forms/teams/$', views.HomeAttendeesFormView.as_view(), name='teams_query')
+    url(r'^forms/teams/$', views.HomeAttendeesFormView.as_view(), name='teams_query'),
+
+    url(r'^forms/win_percentage/$', views.WinPercentageFormView.as_view(), name='win_percentage_query')
 ]
