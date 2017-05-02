@@ -144,9 +144,17 @@ class HomeAttendeesFormView(View):
     
     def post(self, request):
         form = self.form_class(request.POST)
+        
 
         if request.method == "POST":
             team_id = request.POST['team_id']
+            team = Team.objects.get(team_id = team_id)
+            games = Game.objects.filter(home_team_id= team_id)
+            for pid in Player:
+                for game in games:
+                    if(PlaysIn.objects.filter())
+
+                
 
             return render(request, 'nba/results.html', {'all_players_with_name_height_team_role_points': all_players_with_name_height_team_role_points})
         return render(request, 'nba/forms.html', {'form': form})
