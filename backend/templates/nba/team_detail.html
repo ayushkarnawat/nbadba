@@ -1,4 +1,4 @@
-{% load static %}
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 
@@ -111,19 +111,79 @@
 										<thead>
 											<th>ID</th>
 											<th>Name</th>
-											<th>Height</th>
+											<th>Height (in)</th>
 											<th>Role</th>
 										</thead>
 										<tbody>
 											<!--List all players who play in this team-->
 											{% for player in players %}
 											<tr>
-													<td>{{ player.player_id }}</td>
-													<td>
-														<a href="/player/{{ player.player_id}}/">{{ player.player_name }}</a>
-													</td> 
-													<td>{{ player.height }}</td>
-													<td>{{ player.role }}</td>
+												<td>{{ player.player_id }}</td>
+												<td>
+													<a href="/player/{{ player.player_id}}/">{{ player.player_name }}</a>
+												</td>
+												<td>{{ player.height }}</td>
+												<td>{{ player.role }}</td>
+											</tr>
+											{% endfor %}
+										</tbody>
+									</table>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-4">
+							<div class="card">
+
+								<div class="header">
+									<h4 class="title">Owners</h4>
+								</div>
+								<div class="content table-responsive table-full-width">
+									<table class="table table-hover table-striped">
+										<thead>
+											<th>Name</th>
+											<th>Age</th>
+											<th>Networth</th>
+										</thead>
+										<tbody>
+											<!--List all owners who play in this team-->
+											{% for owner in owners %}
+											<tr>
+												<td>{{ owner.owner_name }}</td>
+												<td>{{ owner.age }}</td>
+												<td>${{ owner.networth }}</td>
+											</tr>
+											{% endfor %}
+										</tbody>
+									</table>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="col-md-8">
+							<div class="card">
+
+								<div class="header">
+									<h4 class="title">Coaches</h4>
+								</div>
+								<div class="content table-responsive table-full-width">
+									<table class="table table-hover table-striped">
+										<thead>
+											<th>Coach ID</th>
+											<th>Name</th>
+											<th>Type</th>
+										</thead>
+										<tbody>
+											<!--List all owners who play in this team-->
+											{% for coach in coaches %}
+											<tr>
+												<td>{{ coach.coach_id }}</td>
+												<td>{{ coach.coach_name }}</td>
+												<td>{{ coach.coach_type }}</td>
 											</tr>
 											{% endfor %}
 										</tbody>

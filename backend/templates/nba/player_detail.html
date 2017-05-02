@@ -96,9 +96,65 @@
 					<!--Basic Player Information-->
 					<div class="text-center">
 						<h3>{{ player.player_name}}</h3>
-						<p class="category">{{ player.role }} | 
-							<a href="/team/{{ player.team.team_id }}/">{{ player.team.home_city}} {{ player.team.team_name }}</a> 
+						<p class="category">{{ player.role }} |
+							<a href="/team/{{ player.team.team_id }}/">{{ player.team.home_city}} {{ player.team.team_name }}</a>
 						</p>
+					</div>
+
+					<div class="row">
+						<div class="col-md-8">
+							<div class="card">
+
+								<div class="header">
+									<h4 class="title">Games Played in 2015-2016</h4>
+								</div>
+
+								<div class="content table-responsive table-full-width">
+									<table class="table table-hover table-striped">
+										<thead>
+											<th>Date</th>
+											<th>Game (Away vs. Home)</th>
+											<th>Points</th>
+										</thead>
+										<tbody>
+											<!--Basic info about player and what games they played in-->
+											{% for game in games_played %}
+											<tr>
+												<td>{{ game.date }}</td>
+												<td> <a href="/game/{{ game.date.year }}-{{ game.date.month }}-{{ game.date.day }}/{{ game.away_team_id.team_id }}-{{ game.home_team_id.team_id }}/"
+													/>{{ game.away_team_id.team_name }} vs. {{ game.home_team_id.team_name }}</a>
+												</td>
+												<td>{{ game.points_scored}}</td>
+											</tr>
+											{% endfor %}
+										</tbody>
+									</table>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="col-md-4">
+							<div class="card">
+
+								<div class="content table-responsive table-full-width">
+									<table class="table table-hover table-striped">
+										<thead>
+											<th>Height (in)</th>
+											<th>Points Per Game (avg)</th>
+										</thead>
+										<tbody>
+											<!--Basic info about player-->
+											<tr>
+												<td>{{ player.height }}</td>
+												<td>{{ avg_points_per_game.points_scored__avg }}</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+
+							</div>
+						</div>
 					</div>
 
 				</div>
