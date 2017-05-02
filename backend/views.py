@@ -151,7 +151,10 @@ class HomeAttendeesFormView(View):
                 for game in games:
                     if(PlaysIn.objects.filter())
 
+<<<<<<< HEAD
                 
 
+=======
+>>>>>>> 06ec999f54bd30221db50f7397034741ef7c41b0
             return render(request, 'nba/results.html', {'form': form})
         return render(request, 'nba/forms.html', {'form': form})
