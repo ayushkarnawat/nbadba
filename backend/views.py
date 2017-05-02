@@ -116,15 +116,12 @@ class PlayersFormView(View):
             # Get the list of teams with the associated team name
             team_names = Team.objects.filter(team_name__icontains=team_name)
 
-            print("This reaches here 1")
             # Get average points per game for the list of players with player with the id player
-            player_id = Player.objects.filter(player_name__icontains=player_name)
+            player_ids = Player.objects.filter(player_name__icontains=player_name)
 
-            print("This reaches here 2")
             avg_points_per_game_for_all_players = []
-            for pid in player_id:
-                print("This reaches here 3")
-                avg_points_per_game = PlaysIn.objects.filter(player_id__icontains=pid).aggregate(Avg('points_scored'))
+            for pid in player_ids:
+                avg_points_per_game = PlaysIn.objects.filter(player_id=pid).aggregate(Avg('points_scored'))
                 avg_points_per_game_for_all_players.append(avg_points_per_game)
 
             all_players_with_name_height_team_role_points = []
@@ -133,7 +130,7 @@ class PlayersFormView(View):
                 all_players_with_name_height_team_role_points.append(players)
 
             return render(request, 'nba/results.html', {'all_players_with_name_height_team_role_points': all_players_with_name_height_team_role_points})
-        return render(request, 'nba/forms.html', {'form': form},)
+        return render(request, 'nba/forms.html', {'form': form})
 
 class HomeAttendeesFormView(View):
     form_class = HomeAttendeesForm
@@ -156,5 +153,5 @@ class HomeAttendeesFormView(View):
 
                 
 
-            return render(request, 'nba/results.html', {'all_players_with_name_height_team_role_points': all_players_with_name_height_team_role_points})
+            return render(request, 'nba/results.html', {'form': form})
         return render(request, 'nba/forms.html', {'form': form})
