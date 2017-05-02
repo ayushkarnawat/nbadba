@@ -134,8 +134,19 @@ class HomeAttendeesFormView(View):
 
         if request.method == "POST":
             team_id = request.POST['team_id']
+            print(team_id)
+            query = """SELECT p.Player_name, p.player_id
+                        FROM Players p
+                        WHERE NOT EXISTS (SELECT *
+                                FROM games g
+                                WHERE g.home_team_id_id = '%%{}%%'
+                                AND NOT EXISTS (SELECT *	
+                                    FROM playsIn pi
+                                    WHERE g.away_team_id_id = pi.away_team_id_id
+                                        AND g.home_team_id_id = pi.home_team_id_id
+                                        AND g.date = pi.date
+                                        AND p.player_id = pi.player_id_id))""".format(team_id)
 
-
-
-            return render(request, 'nba/results.html', {'form': form})
+            all_players = Player.objects.raw(query)                         
+            return render(request, 'nba/results2.html', {'all_players': all_players})
         return render(request, 'nba/forms.html', {'form': form})
