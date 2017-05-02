@@ -110,8 +110,8 @@
 
 			<div class="content">
 				<div class="container-fluid">
+					<h3 class="text-center">Search for players with common attributes</h3>
 					<form role="form" action="" method="POST" enctype="multipart/form-data">
-						Search for players with common attributes:
 						{% csrf_token %} {{ form.as_p }}
 						<button class="btn btn-success" type="submit" value="OK">Search</button>
 					</form>

@@ -121,13 +121,13 @@
 									<table class="table table-hover table-striped">
 										<thead>
 											<th>Team</th>
-											<th>Home Winrate</th>
+											<th>Home Win-Rate Percentage</th>
 										</thead>
 										<tbody>
 											<!--List all players who play in this team-->
 											{% for team in teams %}
 											<tr>
-												<td>{{ team.team_name }}</td>
+												<td><a href="/team/{{ team.team_id }}/" />{{ team.team_name }}</td>
 												<td>{{ team.cnt }}</td>
 											</tr>
 											{% endfor %}
