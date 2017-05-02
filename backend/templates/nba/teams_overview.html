@@ -109,7 +109,9 @@
 									<h4 class="title">Teams</h4>
 									<!--<p class="category">Backend development</p>-->
 								</div>
+								<div>Who played in every home game for this team?</div>
 								<div class="content">
+									
 									{% for team in teams %}
 									<li><a href="/team/{{ team.team_id }}/" />{{ team.home_city }} {{ team.team_name }}</li>
 									{% endfor %}
