@@ -98,38 +98,28 @@ class PlayersFormView(View):
 
         if request.method == "POST":
             player_name = request.POST['player_name'].lower()
-            min_height = request.POST['min_height']
-            max_height = request.POST['max_height']
+            min_height = int(request.POST['min_height'])
+            max_height = int(request.POST['max_height'])
             team_name = request.POST['team_name'].lower()
             role = request.POST['role'].lower()
-            min_points_scored = request.POST['min_points_scored']
-            max_points_scored = request.POST['max_points_scored']
+            min_points_scored = int(request.POST['min_points_scored'])
+            max_points_scored = int(request.POST['max_points_scored'])
 
-            print("Player: " + player_name)
-            print("Min Height: " + min_height)
-            print("Max Height: " + max_height)
-            print("Team Name: " + team_name)
-            print("Role: " + role)
-            print("Min Points Scored: " + min_points_scored)
-            print("Max Points Scored: " + max_points_scored)
+            query = """SELECT Player_Name, Team_name, Role, Height, avg(Points_Scored), Player_ID
+                        FROM Players p, PlaysIn, Teams t
+                        WHERE Player_ID = Player_ID_ID
+                            AND player_Name like '%%{}%%'
+                            AND height > {}
+                            AND height < {}
+                            AND Team_Name like '%%{}%%'
+                            AND p.team_id = t.team_id
+                            AND p.role like '%%{}%%'
+                        GROUP BY Player_ID
+                        Having avg(Points_Scored) > {} and avg(Points_Scored) < {}""".format(player_name, min_height, max_height, team_name, role, min_points_scored, max_points_scored)
 
-            # Get the list of teams with the associated team name
-            team_names = Team.objects.filter(team_name__icontains=team_name)
+            all_players = Player.objects.raw(query)
 
-            # Get average points per game for the list of players with player with the id player
-            player_ids = Player.objects.filter(player_name__icontains=player_name)
-
-            avg_points_per_game_for_all_players = []
-            for pid in player_ids:
-                avg_points_per_game = PlaysIn.objects.filter(player_id=pid).aggregate(Avg('points_scored'))
-                avg_points_per_game_for_all_players.append(avg_points_per_game)
-
-            all_players_with_name_height_team_role_points = []
-            for team_name in team_names:
-                players = Player.objects.filter(player_name__icontains=player_name, height__range=(min_height, max_height), team_name__icontains=team_name, role__icontains=role, points_scored__avg__range=(min_points_scored, max_points_scored))
-                all_players_with_name_height_team_role_points.append(players)
-
-            return render(request, 'nba/results.html', {'all_players_with_name_height_team_role_points': all_players_with_name_height_team_role_points})
+            return render(request, 'nba/results.html', {'all_players': all_players})
         return render(request, 'nba/forms.html', {'form': form})
 
 class HomeAttendeesFormView(View):
@@ -141,20 +131,11 @@ class HomeAttendeesFormView(View):
     
     def post(self, request):
         form = self.form_class(request.POST)
-        
 
         if request.method == "POST":
             team_id = request.POST['team_id']
-            team = Team.objects.get(team_id = team_id)
-            games = Game.objects.filter(home_team_id= team_id)
-            for pid in Player:
-                for game in games:
-                    if(PlaysIn.objects.filter())
 
-<<<<<<< HEAD
-                
+            
 
-=======
->>>>>>> 06ec999f54bd30221db50f7397034741ef7c41b0
             return render(request, 'nba/results.html', {'form': form})
         return render(request, 'nba/forms.html', {'form': form})

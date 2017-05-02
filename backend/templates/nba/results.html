@@ -105,7 +105,10 @@
 			<div class="content">
 				<div class="container-fluid">
 					<!--Add dynamic stuff here-->
-					{{% all_players_with_name_height_team_role_points %}}
+					{% for player in all_players %}
+					{{ player.player_id }}
+					{{ player.team.team_name }}
+					{% endfor %}
 				</div>
 			</div>
 
