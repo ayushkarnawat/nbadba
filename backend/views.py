@@ -8,7 +8,7 @@ from django.views.generic import View
 from django.db.models import Count, Avg
 
 from .models import Team, Player, GameScore, Game, Coach, Owner, PlaysIn
-from .forms import PlayersForm, HomeAttendeesForm
+from .forms import PlayersForm, HomeAttendeesForm, WinPercentageForm
 
 # Create your views here.
 def index(request):
@@ -147,6 +147,26 @@ class HomeAttendeesFormView(View):
                                         AND g.date = pi.date
                                         AND p.player_id = pi.player_id_id))""".format(team_id)
 
-            all_players = Player.objects.raw(query)                         
-            return render(request, 'nba/results2.html', {'all_players': all_players})
+            players = Player.objects.raw(query)                         
+            return render(request, 'nba/results2.html', {'players': players})
+        return render(request, 'nba/forms.html', {'form': form})
+
+
+class WinPercentageFormView(View):
+    form_class = WinPercentageForm
+
+    def get(self, request):
+        form = self.form_class(None)
+        return render(request, 'nba/win_percentage_query.html', {'form': form})
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+
+        if request.method == "POST":
+            team_id = request.POST['team_id']
+            print(team_id)
+
+            # ADD QUERY HERE
+
+            return render(request, 'nba/results3.html', {'players': players})
         return render(request, 'nba/forms.html', {'form': form})
