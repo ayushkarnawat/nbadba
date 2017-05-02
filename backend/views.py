@@ -117,9 +117,9 @@ class PlayersFormView(View):
                         GROUP BY Player_ID
                         Having avg(Points_Scored) > {} and avg(Points_Scored) < {}""".format(player_name, min_height, max_height, team_name, role, min_points_scored, max_points_scored)
 
-            all_players = Player.objects.raw(query)
+            players = Player.objects.raw(query)
 
-            return render(request, 'nba/results.html', {'all_players': all_players})
+            return render(request, 'nba/results.html', {'players': players})
         return render(request, 'nba/forms.html', {'form': form})
 
 class HomeAttendeesFormView(View):
