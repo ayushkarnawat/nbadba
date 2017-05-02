@@ -22,5 +22,7 @@ urlpatterns = [
     url(r'^player/(?P<player_id>[0-9]+)/$', views.player_detail, name='player_detail'),
 
     # /game/<year>-<month>-<day>/<away_team>-<home_team>
-    url(r'^game/(?P<year>[0-9]+)-(?P<month>[0-9]+)-(?P<day>[0-9]+)/(?P<away_team_id>[A-Z]+)-(?P<home_team_id>[A-Z]+)/$', views.game_detail, name='game_detail')
+    url(r'^game/(?P<year>[0-9]+)-(?P<month>[0-9]+)-(?P<day>[0-9]+)/(?P<away_team_id>[A-Z]+)-(?P<home_team_id>[A-Z]+)/$', views.game_detail, name='game_detail'),
+
+    url(r'^forms/$', views.PlayersFormView.as_view(), name='players_query')
 ]
