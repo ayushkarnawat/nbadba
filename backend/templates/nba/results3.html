@@ -115,20 +115,20 @@
 							<div class="card">
 
 								<div class="header">
-									<h4 class="title">Players</h4>
+									<h4 class="title">Teams</h4>
 								</div>
 								<div class="content table-responsive table-full-width">
 									<table class="table table-hover table-striped">
 										<thead>
 											<th>Team</th>
-											<th>Count</th>
+											<th>Home Winrate</th>
 										</thead>
 										<tbody>
 											<!--List all players who play in this team-->
-											{% for player in players %}
+											{% for team in teams %}
 											<tr>
-												<td>{{ player.team.team_name }}</td>
-												<td>{{ player.role }}</td>
+												<td>{{ team.team_name }}</td>
+												<td>{{ team.cnt }}</td>
 											</tr>
 											{% endfor %}
 										</tbody>

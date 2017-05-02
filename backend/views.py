@@ -166,7 +166,13 @@ class WinPercentageFormView(View):
             team_id = request.POST['team_id']
             print(team_id)
 
-            # ADD QUERY HERE
+        
+            query = """SELECT t.team_name, t.team_id, (count(*) / .41) AS cnt, (100-(count(*) / .41)) AS cnt2
+                        FROM Games g, Teams t
+                        WHERE t.team_ID = g.home_Team_ID_id
+                            AND g.winning_Team like 'home'
+                            AND t.team_ID = '{}'""".format(team_id)
+            teams = Team.objects.raw(query)
 
-            return render(request, 'nba/results3.html', {'players': players})
+            return render(request, 'nba/results3.html', {'teams': teams})
         return render(request, 'nba/forms.html', {'form': form})
