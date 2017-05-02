@@ -2,11 +2,11 @@ from django import forms
 from .models import Team, Player, GameScore, Game, Coach, Owner, PlaysIn
 
 class PlayersForm(forms.ModelForm):
-    player_name = forms.CharField(max_length=30, initial='')
+    player_name = forms.CharField(max_length=30, initial='%')
     min_height = forms.IntegerField(initial=1)
     max_height = forms.IntegerField(initial=100)
-    team_name = forms.CharField(max_length=20, initial='')
-    role = forms.CharField(max_length=20, initial='')
+    team_name = forms.CharField(max_length=20, initial='%')
+    role = forms.CharField(max_length=20, initial='%')
     min_points_scored = forms.IntegerField(initial=1)
     max_points_scored = forms.IntegerField(initial=100)
 
