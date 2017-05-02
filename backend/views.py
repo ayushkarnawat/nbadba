@@ -139,7 +139,7 @@ class HomeAttendeesFormView(View):
                         FROM Players p
                         WHERE NOT EXISTS (SELECT *
                                 FROM games g
-                                WHERE g.home_team_id_id = '%%{}%%'
+                                WHERE g.home_team_id_id = '{}'
                                 AND NOT EXISTS (SELECT *	
                                     FROM playsIn pi
                                     WHERE g.away_team_id_id = pi.away_team_id_id

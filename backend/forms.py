@@ -31,7 +31,7 @@ class HomeAttendeesForm(forms.ModelForm):
         ('LAC', 'Clippers'),
         ('LAL', 'Lakers'),
         ('MEM', 'Grizzlies'),
-        ('Heat', 'MIA'),
+        ('MIA', 'Heat'),
         ('MIL','Bucks'),
         ('MIN','Timberwolves'),
         ('NOP','Pelicans'),
