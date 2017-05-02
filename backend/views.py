@@ -8,7 +8,7 @@ from django.views.generic import View
 from django.db.models import Count, Avg
 
 from .models import Team, Player, GameScore, Game, Coach, Owner, PlaysIn
-from .forms import PlayersForm
+from .forms import PlayersForm, HomeAttendeesForm
 
 # Create your views here.
 def index(request):
@@ -112,16 +112,41 @@ class PlayersFormView(View):
             print("Role: " + role)
             print("Min Points Scored: " + min_points_scored)
             print("Max Points Scored: " + max_points_scored)
-            # # Get the list of teams with the associated team name
-            # team_names = get_list_or_404(Team, team_name=team_name)
 
-            # # Get average points per game for the specfic player with the id player
-            # avg_points_per_game = PlaysIn.objects.filter(player_id=player_id).aggregate(Avg('points_scored'))
+            # Get the list of teams with the associated team name
+            team_names = Team.objects.filter(team_name__icontains=team_name)
 
-            # all_players_with_name_height_team_role_points = []
-            # for team_name in team_names:
-            #     players = Player.objects.filter(player_name=player_name, height__range(min_height, max_height), team_name=team_name, role=role, points_scored__avg__range(min_points_scored, max_points_scored))
-            #     all_players_with_name_height_team_role_points.append(players)
+            print("This reaches here 1")
+            # Get average points per game for the list of players with player with the id player
+            player_id = Player.objects.filter(player_name__icontains=player_name)
 
-            return render(request, 'nba/results.html', {'form': form},)
-        return render(request, 'nba/results.html', {'form': form},)
+            print("This reaches here 2")
+            avg_points_per_game_for_all_players = []
+            for pid in player_id:
+                print("This reaches here 3")
+                avg_points_per_game = PlaysIn.objects.filter(player_id__icontains=pid).aggregate(Avg('points_scored'))
+                avg_points_per_game_for_all_players.append(avg_points_per_game)
+
+            all_players_with_name_height_team_role_points = []
+            for team_name in team_names:
+                players = Player.objects.filter(player_name__icontains=player_name, height__range=(min_height, max_height), team_name__icontains=team_name, role__icontains=role, points_scored__avg__range=(min_points_scored, max_points_scored))
+                all_players_with_name_height_team_role_points.append(players)
+
+            return render(request, 'nba/results.html', {'all_players_with_name_height_team_role_points': all_players_with_name_height_team_role_points})
+        return render(request, 'nba/forms.html', {'form': form},)
+
+class HomeAttendeesFormView(View):
+    form_class = HomeAttendeesForm
+
+    def get(self, request):
+        form = self.form_class(None)
+        return render(request, 'nba/teams_query.html', {'form': form})
+    
+    def post(self, request):
+        form = self.form_class(request.POST)
+
+        if request.method == "POST":
+            team_id = request.POST['team_id']
+
+            return render(request, 'nba/results.html', {'all_players_with_name_height_team_role_points': all_players_with_name_height_team_role_points})
+        return render(request, 'nba/forms.html', {'form': form})
