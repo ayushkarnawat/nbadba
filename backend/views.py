@@ -105,7 +105,7 @@ class PlayersFormView(View):
             min_points_scored = int(request.POST['min_points_scored'])
             max_points_scored = int(request.POST['max_points_scored'])
 
-            query = """SELECT Player_Name, Team_name, Role, Height, avg(Points_Scored), Player_ID
+            query = """SELECT Player_Name, Team_name, Role, Height, avg(Points_Scored) as avg, Player_ID
                         FROM Players p, PlaysIn, Teams t
                         WHERE Player_ID = Player_ID_ID
                             AND player_Name like '%%{}%%'
@@ -135,7 +135,7 @@ class HomeAttendeesFormView(View):
         if request.method == "POST":
             team_id = request.POST['team_id']
 
-            
+
 
             return render(request, 'nba/results.html', {'form': form})
         return render(request, 'nba/forms.html', {'form': form})
