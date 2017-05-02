@@ -110,11 +110,36 @@
 
 			<div class="content">
 				<div class="container-fluid">
-					<!--Add dynamic stuff here-->
-					{% for player in all_players %}
-					{{ player.player_id }}
-					{{ player.player_name }}
-					{% endfor %}
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+
+								<div class="header">
+									<h4 class="title">Teams</h4>
+								</div>
+								<div class="content table-responsive table-full-width">
+									<table class="table table-hover table-striped">
+										<thead>
+											<th>Name</th>
+											<th>Team</th>
+										</thead>
+										<tbody>
+											<!--List all players who play in this team-->
+											{% for player in players %}
+											<tr>
+												<td>
+													<a href="/player/{{ player.player_id}}/">{{ player.player_name }}</a>
+												</td>
+												<td>{{ player.team_id }}</td>
+											</tr>
+											{% endfor %}
+										</tbody>
+									</table>
+								</div>
+
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 

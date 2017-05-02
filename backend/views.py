@@ -135,7 +135,7 @@ class HomeAttendeesFormView(View):
         if request.method == "POST":
             team_id = request.POST['team_id']
             print(team_id)
-            query = """SELECT p.Player_name, p.player_id
+            query = """SELECT p.Player_name, p.player_id, p.team_id
                         FROM Players p
                         WHERE NOT EXISTS (SELECT *
                                 FROM games g
