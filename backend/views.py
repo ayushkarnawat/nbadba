@@ -167,7 +167,7 @@ class WinPercentageFormView(View):
             print(team_id)
 
         
-            query = """SELECT t.team_Name, t.team_id (count(*) / 41.) AS cnt
+            query = """SELECT t.team_Name, t.team_id, (count(*) / 41.) AS cnt
                         FROM Games g, Teams t
                         WHERE t.team_ID = g.home_Team_ID_id
                             AND g.winning_Team like 'home'

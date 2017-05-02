@@ -110,8 +110,8 @@
 
 			<div class="content">
 				<div class="container-fluid">
-
-					Who played in every home game for this team?
+					<h3 class="text-center">Who played in every home game for this team?</h3>
+					
 					<form role="form" action="" method="POST" enctype="multipart/form-data">
 						{% csrf_token %} {{ form.as_p }}
 						<button class="btn btn-success" type="submit" value="OK">Search</button>
