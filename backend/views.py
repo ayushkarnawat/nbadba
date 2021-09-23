@@ -47,7 +47,7 @@ def team_detail(request, team_id):
     owners = get_list_or_404(Owner, team=team_id)
     return render(
         request,
-        "nba/team_detail.html:,
+        "nba/team_detail.html",
         {
             "team": team,
             "players": players,
