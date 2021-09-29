@@ -1,0 +1,68 @@
+{% extends "./base.html" %}
+
+{% block title %}NBA Dashboard{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Teams</h4>
+      </div>
+      <div class="content">
+        <!-- only display 10 teams -->
+        {% for team in teams|slice:":10" %}
+        <li><a href="/team/{{ team.team_id }}/">{{ team.home_city }}&nbsp;{{ team.team_name }}</li>
+        {% endfor %}
+
+        <div class="footer">
+          <hr>
+          <a href="/teams/">View all teams</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Players</h4>
+      </div>
+      <div class="content">
+        <!-- only display 10 players -->
+        {% for player in players|slice:":10" %}
+        <li><a href="/player/{{ player.player_id }}/" />{{ player.player_name }}</li>
+        {% endfor %}
+
+        <div class="footer">
+          <hr>
+          <a href="/players/">View all players</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card ">
+      <div class="header">
+        <h4 class="title">Games</h4>
+      </div>
+      <div class="content">
+
+        <!-- only display 25 games -->
+        {% for game in games|slice:":25" %}
+        <li><a href="/game/{{ game.date.year }}-{{ game.date.month }}-{{ game.date.day }}/{{ game.away_team_id.team_id }}-{{ game.home_team_id.team_id }}/"
+          />{{ game.date }}:&nbsp;{{ game.away_team_id.team_name }}&nbsp;vs.&nbsp;{{ game.home_team_id.team_name }}</li>
+        {% endfor %}
+
+        <div class="footer">
+          <hr>
+          <a href="/games/">View all games</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

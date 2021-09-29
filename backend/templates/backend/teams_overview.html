@@ -1,0 +1,22 @@
+{% extends "./base.html" %}
+
+{% block title %}Teams{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Teams</h4>
+        <!--<p class="category"></p>-->
+      </div>
+      <div class="content">
+
+        {% for team in teams %}
+        <li><a href="/team/{{ team.team_id }}/">{{ team.home_city }}&nbsp;{{ team.team_name }}</li>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

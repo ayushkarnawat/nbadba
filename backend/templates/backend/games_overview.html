@@ -1,0 +1,21 @@
+{% extends "./base.html" %}
+
+{% block title%}Games{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Games</h4>
+      </div>
+      <div class="content">
+        {% for game in games %}
+        <li><a href="/game/{{ game.date.year }}-{{ game.date.month }}-{{ game.date.day }}/{{ game.away_team_id.team_id }}-{{ game.home_team_id.team_id }}/"
+          />{{ game.date }}:&nbsp;{{ game.away_team_id.team_name }}&nbsp;vs.&nbsp;{{ game.home_team_id.team_name }}</li>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

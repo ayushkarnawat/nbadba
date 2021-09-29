@@ -1,0 +1,21 @@
+{% extends "./base.html" %}
+
+{% block title %}Players{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Players</h4>
+        <!--<p class="category">Backend development</p>-->
+      </div>
+      <div class="content">
+        {% for player in players %}
+        <li><a href="/player/{{ player.player_id }}/" />{{ player.player_name }}</li>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

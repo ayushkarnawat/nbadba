@@ -1,0 +1,49 @@
+{% extends "./base.html" %}
+
+{% block title %}{{ game.away_team_id.team_name }}&nbsp;@&nbsp;
+{{ game.home_team_id.team_name }}&nbsp;&mid;&nbsp;{{ game.date }}{% endblock %}
+
+{% block content %}
+<!-- basic game info-->
+<div class="text-center">
+  <h3>{{ game.away_team_id.team_name }}&nbsp;({{game_score.away_score}})&nbsp;@&nbsp;{{ game.home_team_id.team_name }}&nbsp;({{ game_score.home_score }})</h3>
+  <p class="category">{{ game.date }}</p>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+
+      <div class="header">
+        <h4 class="title">Players</h4>
+      </div>
+      <div class="content table-responsive table-full-width">
+        <table class="table table-hover table-striped">
+          <thead>
+            <th>Name</th>
+            <th>Team</th>
+            <th>Role</th>
+            <th>Points Scored</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <!--List all players who played in this game-->
+            {% for player in players_who_played_in_game %}
+            <tr>
+                <td>
+                  <a href="/player/{{ player.player_id.player_id }}/">{{ player.player_id.player_name }}</a>
+                </td>
+                <td>{{ player.player_id.team }}</td>
+                <td>{{ player.player_id.role }}</td>
+                <td>{{ player.points_scored }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

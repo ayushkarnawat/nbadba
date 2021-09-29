@@ -11,33 +11,53 @@ from .models import Team, Player, GameScore, Game, Coach, Owner, PlaysIn
 
 
 def index(request):
-    # Get all the teams, players, and games
     teams = Team.objects.all().order_by("team_id")
     players = Player.objects.all()
     games = Game.objects.all()
-    return render(
-        request,
-        "nba/index.html",
-        {"teams": teams, "players": players, "games": games},
-    )
+
+    template = "backend/index.html"
+    context = {
+        "page": "index",
+        "teams": teams,
+        "players": players,
+        "games": games,
+    }
+    return render(request, template, context)
 
 
 def teams_overview(request):
-    # Get all the teams in the NBA
     teams = Team.objects.all().order_by("team_id")
-    return render(request, "nba/teams_overview.html", {"teams": teams})
+
+    template = "backend/teams_overview.html"
+    context = {
+        "page": "team",
+        "teams": teams,
+    }
+    return render(request, template, context)
 
 
 def players_overview(request):
-    # Get all the players who played in the NBA in 2015-16 season
+    # all players who played during the 2015-16 season
     players = Player.objects.all();
-    return render(request, "nba/players_overview.html", {"players": players})
+
+    template = "backend/players_overview.html"
+    context = {
+        "page": "player",
+        "players": players,
+    }
+    return render(request, template, context)
 
 
 def games_overview(request):
     # Get all the games from the 2015-16 season
     games = Game.objects.all()
-    return render(request, "nba/games_overview.html", {"games": games})
+
+    template = "backend/games_overview.html"
+    context = {
+        "page": "game",
+        "games": games,
+    }
+    return render(request, template, context)
 
 
 def team_detail(request, team_id):
@@ -45,16 +65,16 @@ def team_detail(request, team_id):
     players = get_list_or_404(Player, team=team_id)
     coaches = get_list_or_404(Coach, team=team_id)
     owners = get_list_or_404(Owner, team=team_id)
-    return render(
-        request,
-        "nba/team_detail.html",
-        {
-            "team": team,
-            "players": players,
-            "coaches": coaches,
-            "owners": owners,
-        },
-    )
+
+    template = "backend/team_detail.html"
+    context = {
+        "page": "team",
+        "team": team,
+        "players": players,
+        "coaches": coaches,
+        "owners": owners,
+    }
+    return render(request, template, context)
 
 
 def player_detail(request, player_id):
@@ -64,15 +84,15 @@ def player_detail(request, player_id):
     )
     avg_points_per_game = PlaysIn.objects.filter(
         player_id=player_id).aggregate(Avg("points_scored"))
-    return render(
-        request,
-        "nba/player_detail.html",
-        {
-            "player": player,
-            "games_played": games_played,
-            "avg_points_per_game": avg_points_per_game,
-        },
-    )
+
+    template = "backend/player_detail.html"
+    context = {
+        "page": "player",
+        "player": player,
+        "games_played": games_played,
+        "avg_points_per_game": avg_points_per_game,
+    }
+    return render(request, template, context)
 
 
 def game_detail(request, year, month, day, away_team_id, home_team_id):
@@ -97,15 +117,15 @@ def game_detail(request, year, month, day, away_team_id, home_team_id):
         home_team_id=home_team_id,
         away_team_id=away_team_id,
     )
-    return render(
-        request,
-        "nba/game_detail.html",
-        {
-            "game": game,
-            "game_score": game_score,
-            "players_who_played_in_game": players_who_played_in_game,
-        }
-    )
+
+    template = "backend/game_detail.html"
+    context = {
+        "page": "game",
+        "game": game,
+        "game_score": game_score,
+        "players_who_played_in_game": players_who_played_in_game,
+    }
+    return render(request, template, context)
 
 
 class PlayersFormView(View):
@@ -113,11 +133,11 @@ class PlayersFormView(View):
 
     def get(self, request):
         form = self.form_class(None)
-        return render(request, "nba/players_query.html", {"form": form})
+        template = "backend/players_query.html"
+        context = {"page": "player_query", "form": form}
+        return render(request, template, context)
 
     def post(self, request):
-        form = self.form_class(request.POST)
-
         if request.method == "POST":
             player_name = request.POST["player_name"].lower()
             min_height = int(request.POST["min_height"])
@@ -150,8 +170,15 @@ class PlayersFormView(View):
             )
 
             players = Player.objects.raw(query)
-            return render(request, "nba/results.html", {"players": players})
-        return render(request, "nba/forms.html", {"form": form})
+
+            template = "backend/results.html"
+            context = {"page": "player_query", "players": players}
+            return render(request, template, context)
+
+        form = self.form_class(request.POST)
+        template = "backend/forms.html"
+        context = {"page": "player_query", "form": form}
+        return render(request, template, context)
 
 
 class HomeAttendeesFormView(View):
@@ -159,11 +186,11 @@ class HomeAttendeesFormView(View):
 
     def get(self, request):
         form = self.form_class(None)
-        return render(request, "nba/teams_query.html", {"form": form})
+        template = "backend/teams_query.html"
+        context = {"page": "team_query", "form": form}
+        return render(request, template, context)
 
     def post(self, request):
-        form = self.form_class(request.POST)
-
         if request.method == "POST":
             team_id = request.POST['team_id']
             query = """
@@ -181,8 +208,15 @@ class HomeAttendeesFormView(View):
             """.format(team_id)
 
             players = Player.objects.raw(query)
-            return render(request, "nba/results2.html", {"players": players})
-        return render(request, "nba/forms.html", {"form": form})
+
+            template = "backend/results2.html"
+            context = {"page": "team_query", "players": players}
+            return render(request, template, context)
+
+        form = self.form_class(request.POST)
+        template = "backend/forms.html"
+        context = {"page": "team_query", "form": form}
+        return render(request, template, context)
 
 
 class WinPercentageFormView(View):
@@ -190,11 +224,11 @@ class WinPercentageFormView(View):
 
     def get(self, request):
         form = self.form_class(None)
-        return render(request, "nba/win_percentage_query.html", {"form": form})
+        template = "backend/win_percentage_query.html"
+        context = {"page": "win_query", "form": form}
+        return render(request, template, context)
 
     def post(self, request):
-        form = self.form_class(request.POST)
-
         if request.method == "POST":
             team_id = request.POST["team_id"]
             print(team_id)
@@ -207,6 +241,11 @@ class WinPercentageFormView(View):
                 AND t.team_ID = '{}'
             """.format(team_id)
             teams = Team.objects.raw(query)
+            template = "backend/results3.html"
+            context = {"page": "win_query", "teams": teams}
+            return render(request, template, context)
 
-            return render(request, "nba/results3.html", {"teams": teams})
-        return render(request, "nba/forms.html", {"form": form})
+        form = self.form_class(request.POST)
+        template = "backend/forms.html"
+        context = {"page": "win_query", "form": form}
+        return render(request, template, context)

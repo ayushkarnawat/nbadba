@@ -1,0 +1,129 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="">
+  <meta name="description" content="">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, shrink-to-fit=no">
+
+  <!-- title -->
+  <title>{% block title %}{% endblock %}</title>
+
+  <!-- style -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/animate.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/light-bootstrap-dashboard.css' %}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+    integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+    crossorigin="anonymous">
+
+  <!-- fonts, icons -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/pe-icon-7-stroke.css' %}">
+  <link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="text/css" href="http://fonts.googleapis.com/css?family=Roboto:400,700,300">
+
+  <!-- load jquery before bootstrap (for proper button behavior) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+  <script src="{% static 'js/bootstrap-checkbox-radio-switch.js' %}"></script>
+  <script src="{% static 'js/light-bootstrap-dashboard.js' %}"></script>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="sidebar" data-color="blue">
+      <div class="sidebar-wrapper">
+        <div class="logo">
+          <a href="/" class="simple-text">NBA Database</a>
+        </div>
+
+        <ul class="nav">
+          <li {% if page == "index" %}class="active"{% endif %}>
+            <a href="/">
+              <i class="pe-7s-graph"></i><p>Overview</p>
+            </a>
+          </li>
+          <li {% if page == "team" %}class="active"{% endif %}>
+            <a href="/teams/">
+              <i class="pe-7s-note2"></i><p>Teams</p>
+            </a>
+          </li>
+          <li {% if page == "player" %}class="active"{% endif %}>
+            <a href="/players/">
+              <i class="pe-7s-user"></i><p>Players</p>
+            </a>
+          </li>
+          <li {% if page == "game" %}class="active"{% endif %}>
+            <a href="/games/">
+              <i class="pe-7s-news-paper"></i><p>Games</p>
+            </a>
+          </li>
+          <li {% if page == "player_query" %}class="active"{% endif %}>
+            <a href="/forms/players/">
+              <i class="pe-7s-search"></i><p>Players&nbsp;Query</p>
+            </a>
+          </li>
+          <li {% if page == "team_query" %}class="active"{% endif %}>
+            <a href="/forms/teams/">
+              <i class="pe-7s-search"></i><p>Teams&nbsp;Query</p>
+            </a>
+          </li>
+          <li {% if page == "win_query" %}class="active"{% endif %}>
+            <a href="/forms/win_percentage/">
+              <i class="pe-7s-search"></i><p>Win&nbsp;Percentage&nbsp;Query</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="main-panel">
+      <nav class="navbar navbar-default navbar-static-top">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/">Dashboard</a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+              data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+
+          <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/admin">Admin</a></li>
+              <!-- <li><a href="#">Log out</a></li> -->
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="content">
+        <div class="container-fluid">
+          {% block content %}
+          {% endblock %}
+        </div>
+      </div>
+
+      <footer class="footer">
+        <div class="container-fluid">
+          <p class="copyright text-center">
+            Made with <img src="{% static 'fonts/code.svg' %}" alt="code"> 2017
+          </p>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+</body>
+
+</html>

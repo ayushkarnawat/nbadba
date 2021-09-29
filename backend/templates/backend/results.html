@@ -1,0 +1,43 @@
+{% extends "./base.html" %}
+
+{% block title %}Player Results{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+
+      <div class="header">
+        <h4 class="title">Players</h4>
+      </div>
+      <div class="content table-responsive table-full-width">
+        <table class="table table-hover table-striped">
+          <thead>
+            <th>Name</th>
+            <th>Team</th>
+            <th>Role</th>
+            <th>Height (in)</th>
+            <th>Points Per Game (avg)</th>
+          </thead>
+          <tbody>
+            <!--List all players who play in this team-->
+            {% for player in players %}
+            <tr>
+              <td>
+                <a href="/player/{{ player.player_id }}/">{{ player.player_name }}</a>
+              </td>
+              <td>
+                <a href="/team/{{player.team.team_id }}/">{{ player.team.team_name }}</a
+              ></td>
+              <td>{{ player.role }}</td>
+              <td>{{ player.height }}</td>
+              <td>{{ player.avg }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
