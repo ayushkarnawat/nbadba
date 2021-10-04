@@ -9,7 +9,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('backend', '0006_auto_20170423_1649'),
+        ('dashboard', '0006_auto_20170423_1649'),
     ]
 
     operations = [
@@ -19,8 +19,8 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('date', models.DateField(blank=True, null=True)),
                 ('winning_team', models.CharField(blank=True, choices=[('HOME', 'Home Team'), ('AWAY', 'Away Team')], default=None, max_length=20, null=True)),
-                ('away_team_id', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='away_team_id_game', to='backend.Team')),
-                ('home_team_id', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='home_team_id_game', to='backend.Team')),
+                ('away_team_id', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='away_team_id_game', to='dashboard.Team')),
+                ('home_team_id', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='home_team_id_game', to='dashboard.Team')),
             ],
         ),
         migrations.AlterUniqueTogether(

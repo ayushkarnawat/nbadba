@@ -8,7 +8,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('backend', '0019_auto_20170426_2334'),
+        ('dashboard', '0019_auto_20170426_2334'),
     ]
 
     operations = [

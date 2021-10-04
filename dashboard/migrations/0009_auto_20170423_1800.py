@@ -9,7 +9,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('backend', '0008_coach'),
+        ('dashboard', '0008_coach'),
     ]
 
     operations = [
@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('owner_name', models.CharField(blank=True, max_length=30, null=True)),
                 ('age', models.IntegerField(blank=True, null=True)),
                 ('networth', models.IntegerField(blank=True, null=True)),
-                ('team_id', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='backend.Team')),
+                ('team_id', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='dashboard.Team')),
             ],
         ),
         migrations.CreateModel(
@@ -29,9 +29,9 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('date', models.DateField(blank=True, null=True)),
                 ('points_scored', models.IntegerField(blank=True, null=True)),
-                ('away_team_id', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='away_team_id_playsin', to='backend.Team')),
-                ('home_team_id', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='home_team_id_playsin', to='backend.Team')),
-                ('player_id', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='backend.Player')),
+                ('away_team_id', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='away_team_id_playsin', to='dashboard.Team')),
+                ('home_team_id', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='home_team_id_playsin', to='dashboard.Team')),
+                ('player_id', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='dashboard.Player')),
             ],
             options={
                 'db_table': 'PlaysIn',

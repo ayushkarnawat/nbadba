@@ -9,7 +9,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('backend', '0017_auto_20170426_2327'),
+        ('dashboard', '0017_auto_20170426_2327'),
     ]
 
     operations = [
@@ -31,32 +31,32 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='game',
             name='away_team',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='away_team_game', to='backend.Team'),
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='away_team_game', to='dashboard.Team'),
         ),
         migrations.AddField(
             model_name='game',
             name='home_team',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='home_team_game', to='backend.Team'),
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='home_team_game', to='dashboard.Team'),
         ),
         migrations.AddField(
             model_name='gamescore',
             name='away_team',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='away_team', to='backend.Team'),
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='away_team', to='dashboard.Team'),
         ),
         migrations.AddField(
             model_name='gamescore',
             name='home_team',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='home_team', to='backend.Team'),
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='home_team', to='dashboard.Team'),
         ),
         migrations.AddField(
             model_name='playsin',
             name='away_team',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='away_team_playsin', to='backend.Team'),
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='away_team_playsin', to='dashboard.Team'),
         ),
         migrations.AddField(
             model_name='playsin',
             name='home_team',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='home_team_playsin', to='backend.Team'),
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='home_team_playsin', to='dashboard.Team'),
         ),
         migrations.RemoveField(
             model_name='game',

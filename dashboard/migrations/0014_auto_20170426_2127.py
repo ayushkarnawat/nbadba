@@ -9,14 +9,14 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('backend', '0013_auto_20170426_2104'),
+        ('dashboard', '0013_auto_20170426_2104'),
     ]
 
     operations = [
         migrations.AlterField(
             model_name='player',
             name='team_id',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='backend.Team'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='dashboard.Team'),
         ),
         migrations.AlterField(
             model_name='team',

@@ -9,7 +9,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('backend', '0007_auto_20170423_1713'),
+        ('dashboard', '0007_auto_20170423_1713'),
     ]
 
     operations = [
@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                 ('coach_id', models.CharField(max_length=5, primary_key=True, serialize=False)),
                 ('coach_name', models.CharField(blank=True, max_length=30, null=True)),
                 ('age', models.IntegerField(blank=True, null=True)),
-                ('team_id', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='backend.Team')),
+                ('team_id', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='dashboard.Team')),
             ],
             options={
                 'db_table': 'Coaches',

@@ -9,7 +9,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('backend', '0005_player'),
+        ('dashboard', '0005_player'),
     ]
 
     operations = [
@@ -55,12 +55,12 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='gamescore',
             name='away_team_id',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='away_team_id', to='backend.Team'),
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='away_team_id', to='dashboard.Team'),
         ),
         migrations.AddField(
             model_name='gamescore',
             name='home_team_id',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='home_team_id', to='backend.Team'),
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='home_team_id', to='dashboard.Team'),
         ),
         migrations.AlterUniqueTogether(
             name='gamescore',
