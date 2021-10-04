@@ -36,7 +36,7 @@ programatically query endpoints provided by the NBA (e.g. for
 and
 [players](https://stats.nba.com/stats/commonplayerinfo?LeagueID=&PlayerID=2544)).
 
-![Database ontology](assets/entity_relationship_diagram.pdf)
+![Database ontology](assets/entity_relationship_diagram.png)
 
 ### Teams
 
