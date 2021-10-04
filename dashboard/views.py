@@ -15,7 +15,7 @@ def index(request):
     players = Player.objects.all()
     games = Game.objects.all()
 
-    template = "backend/index.html"
+    template = "dashboard/index.html"
     context = {
         "page": "index",
         "teams": teams,
@@ -28,7 +28,7 @@ def index(request):
 def teams_overview(request):
     teams = Team.objects.all().order_by("team_id")
 
-    template = "backend/teams_overview.html"
+    template = "dashboard/teams_overview.html"
     context = {
         "page": "team",
         "teams": teams,
@@ -40,7 +40,7 @@ def players_overview(request):
     # all players who played during the 2015-16 season
     players = Player.objects.all();
 
-    template = "backend/players_overview.html"
+    template = "dashboard/players_overview.html"
     context = {
         "page": "player",
         "players": players,
@@ -52,7 +52,7 @@ def games_overview(request):
     # Get all the games from the 2015-16 season
     games = Game.objects.all()
 
-    template = "backend/games_overview.html"
+    template = "dashboard/games_overview.html"
     context = {
         "page": "game",
         "games": games,
@@ -66,7 +66,7 @@ def team_detail(request, team_id):
     coaches = get_list_or_404(Coach, team=team_id)
     owners = get_list_or_404(Owner, team=team_id)
 
-    template = "backend/team_detail.html"
+    template = "dashboard/team_detail.html"
     context = {
         "page": "team",
         "team": team,
@@ -85,7 +85,7 @@ def player_detail(request, player_id):
     avg_points_per_game = PlaysIn.objects.filter(
         player_id=player_id).aggregate(Avg("points_scored"))
 
-    template = "backend/player_detail.html"
+    template = "dashboard/player_detail.html"
     context = {
         "page": "player",
         "player": player,
@@ -118,7 +118,7 @@ def game_detail(request, year, month, day, away_team_id, home_team_id):
         away_team_id=away_team_id,
     )
 
-    template = "backend/game_detail.html"
+    template = "dashboard/game_detail.html"
     context = {
         "page": "game",
         "game": game,
@@ -133,7 +133,7 @@ class PlayersFormView(View):
 
     def get(self, request):
         form = self.form_class(None)
-        template = "backend/players_query.html"
+        template = "dashboard/players_query.html"
         context = {"page": "player_query", "form": form}
         return render(request, template, context)
 
@@ -171,12 +171,12 @@ class PlayersFormView(View):
 
             players = Player.objects.raw(query)
 
-            template = "backend/results.html"
+            template = "dashboard/results.html"
             context = {"page": "player_query", "players": players}
             return render(request, template, context)
 
         form = self.form_class(request.POST)
-        template = "backend/forms.html"
+        template = "dashboard/forms.html"
         context = {"page": "player_query", "form": form}
         return render(request, template, context)
 
@@ -186,7 +186,7 @@ class HomeAttendeesFormView(View):
 
     def get(self, request):
         form = self.form_class(None)
-        template = "backend/teams_query.html"
+        template = "dashboard/teams_query.html"
         context = {"page": "team_query", "form": form}
         return render(request, template, context)
 
@@ -209,12 +209,12 @@ class HomeAttendeesFormView(View):
 
             players = Player.objects.raw(query)
 
-            template = "backend/results2.html"
+            template = "dashboard/results2.html"
             context = {"page": "team_query", "players": players}
             return render(request, template, context)
 
         form = self.form_class(request.POST)
-        template = "backend/forms.html"
+        template = "dashboard/forms.html"
         context = {"page": "team_query", "form": form}
         return render(request, template, context)
 
@@ -224,7 +224,7 @@ class WinPercentageFormView(View):
 
     def get(self, request):
         form = self.form_class(None)
-        template = "backend/win_percentage_query.html"
+        template = "dashboard/win_percentage_query.html"
         context = {"page": "win_query", "form": form}
         return render(request, template, context)
 
@@ -241,11 +241,11 @@ class WinPercentageFormView(View):
                 AND t.team_ID = '{}'
             """.format(team_id)
             teams = Team.objects.raw(query)
-            template = "backend/results3.html"
+            template = "dashboard/results3.html"
             context = {"page": "win_query", "teams": teams}
             return render(request, template, context)
 
         form = self.form_class(request.POST)
-        template = "backend/forms.html"
+        template = "dashboard/forms.html"
         context = {"page": "win_query", "form": form}
         return render(request, template, context)
